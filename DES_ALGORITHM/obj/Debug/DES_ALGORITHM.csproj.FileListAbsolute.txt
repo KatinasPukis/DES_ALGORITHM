@@ -1,0 +1,10 @@
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\bin\Debug\DES_ALGORITHM.exe.config
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\bin\Debug\DES_ALGORITHM.exe
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\bin\Debug\DES_ALGORITHM.pdb
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\obj\Debug\DES_ALGORITHM.csprojAssemblyReference.cache
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\obj\Debug\DES_ALGORITHM.Form1.resources
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\obj\Debug\DES_ALGORITHM.Properties.Resources.resources
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\obj\Debug\DES_ALGORITHM.csproj.GenerateResource.cache
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\obj\Debug\DES_ALGORITHM.csproj.CoreCompileInputs.cache
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\obj\Debug\DES_ALGORITHM.exe
+C:\Users\domin\source\repos\DES_ALGORITHM\DES_ALGORITHM\obj\Debug\DES_ALGORITHM.pdb
