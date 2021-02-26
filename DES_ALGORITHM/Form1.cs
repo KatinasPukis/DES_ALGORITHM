@@ -14,35 +14,73 @@ namespace DES_ALGORITHM
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
             
         }
+        public static string BiteConverterToString(byte [] data)
+        {
+            byte[] bytes = data;
+            Console.WriteLine("The byte array: ");
+            Console.WriteLine("   {0}\n", BitConverter.ToString(bytes));
+            string s = Convert.ToBase64String(bytes);
+            Console.WriteLine("The base 64 string:\n   {0}\n", s);
+
+            return s;
+        }
+        public static byte[] StringToBite(string byteString)
+        {
+           
+            // Restore the byte array.
+            byte[] newBytes = Convert.FromBase64String(byteString);
+            Console.WriteLine("The restored byte array: ");
+            Console.WriteLine("   {0}\n", BitConverter.ToString(newBytes));
+            return newBytes;
+        }
         public void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                // Create a new DES object to generate a key
-                // and initialization vector (IV).
+
                 DES DESalg = DES.Create();
-
-                // Create a string to encrypt.
+                encryptTextBox.Text = "Testuojam gyvenimo prasme 123!";
+                generatedKeyTextBox.Text = "password";
                 string sData = encryptTextBox.Text;
-
-                // Encrypt the string to an in-memory buffer.
+                string key = generatedKeyTextBox.Text;
+                DESalg.Key = ASCIIEncoding.ASCII.GetBytes(key);
+              //  byte[] keyToByte = StringToBite(key);
                 byte[] Data = EncryptTextToMemory(sData, DESalg.Key, DESalg.IV);
-                // Decrypt the buffer back to a string.
-                string Final = DecryptTextFromMemory(Data, DESalg.Key, DESalg.IV);
-
-                // Display the decrypted string to the console.
-                Console.WriteLine(Final);
+                string encryptedText = ASCIIEncoding.ASCII.GetString(Data);
+                string IV = BiteConverterToString(DESalg.IV);
+                encryptedTextResultTextBox.Text = encryptedText;
+                vectorTextBox.Text = IV;
+                
             }
             catch (Exception es)
             {
                 Console.WriteLine(es.Message);
             }
         }
+        private void decryptButton_Click(object sender, EventArgs e)
+        {
+            DES DESalg = DES.Create();
+            string decryptText = decryptTextBox.Text;
+            string key = keyToDecyptherTextBox.Text;
+            DESalg.Key = ASCIIEncoding.ASCII.GetBytes(key);
+            string IV = vectorDecryptTextBox.Text;
+            byte[] dData= StringToBite(decryptText);
+            byte[] keyToByte = StringToBite(key);
+            byte[] IVToByte = StringToBite(IV);
+            string decryptedtext = DecryptTextFromMemory(dData, DESalg.Key, IVToByte);
+            decryptedTextResultBox.Text = decryptedtext;
+
+
+
+
+        }
+
         public static byte[] EncryptTextToMemory(string Data, byte[] Key, byte[] IV)
         {
             try
@@ -73,8 +111,9 @@ namespace DES_ALGORITHM
                 // Close the streams.
                 cStream.Close();
                 mStream.Close();
-
+               
                 // Return the encrypted buffer.
+                
                 return ret;
             }
             catch (CryptographicException e)
@@ -117,5 +156,9 @@ namespace DES_ALGORITHM
             }
         }
 
+        private void generatedKeyTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
