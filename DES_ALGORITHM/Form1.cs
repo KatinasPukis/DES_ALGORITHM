@@ -14,8 +14,9 @@ namespace DES_ALGORITHM
 {
     public partial class Form1 : Form
     {
+        Encoding encoding = Encoding.GetEncoding("437");
         static string key;
-        public DES DESalg = DES.Create();
+       
         public Form1()
         {
             InitializeComponent();
@@ -44,18 +45,10 @@ namespace DES_ALGORITHM
         public void button1_Click(object sender, EventArgs e)
         {
             // ENCRYPT BUTTON
-            //DES DES = DES.Create();
-            //key = generatedKeyTextBox.Text;
-            //text = encryptTextBox.Text;
-            //DES.Key = ASCIIEncoding.ASCII.GetBytes(key);
-            //vectorTextBox.Text =ASCIIEncoding.ASCII.GetString( DES.IV);
-
-            //byte[] data= EncryptText(text, DES.Key);
-            //encryptedTextResultTextBox.Text = ASCIIEncoding.ASCII.GetString(data);
             try
             {
 
-                
+                DES DESalg = DES.Create();
                 string sData = encryptTextBox.Text;
                 string key = generatedKeyTextBox.Text;
                 if(ECBcheckBox.Checked)
@@ -66,13 +59,14 @@ namespace DES_ALGORITHM
                 {
                     DESalg.Mode = CipherMode.CBC;
                 }
-                DESalg.Key = ASCIIEncoding.ASCII.GetBytes(key);
-
+                DESalg.Key = encoding.GetBytes(key);
+              //  DESalg.IV = DESalg.Key;
+              
                 //  byte[] keyToByte = StringToBite(key);
                 byte[] Data = EncryptTextToMemory(sData, DESalg.Key, DESalg.IV);
-                string encryptedText = Encoding.ASCII.GetString(Data);
+                string encryptedText = encoding.GetString(Data);
                // string encryptedText = BiteConverterToString(Data);
-                string IV = System.Text.Encoding.ASCII.GetString(DESalg.IV);
+                string IV = encoding.GetString(DESalg.IV);
                  //string IV = BiteConverterToString(DESalg.IV);
                 encryptedTextResultTextBox.Text = encryptedText.ToString();
                 vectorTextBox.Text = IV.ToString();
@@ -89,7 +83,7 @@ namespace DES_ALGORITHM
         private void decryptButton_Click(object sender, EventArgs e)
         {
             // DECRYPT BUTTON
-           
+            DES DESalg = DES.Create();
             if (ECBcheckBox.Checked)
             {
                 DESalg.Mode = CipherMode.ECB;
@@ -101,9 +95,10 @@ namespace DES_ALGORITHM
             string decryptText = encryptTextBox.Text;
             string key = generatedKeyTextBox.Text;
             string IV = vectorTextBox.Text;
-            DESalg.Key = ASCIIEncoding.ASCII.GetBytes(key);
-           // DESalg.IV = ASCIIEncoding.ASCII.GetBytes(IV);
-            byte[] dData = Encoding.ASCII.GetBytes(decryptText);
+            DESalg.Key = encoding.GetBytes(key);
+        //    DESalg.IV = DESalg.Key;
+            DESalg.IV = encoding.GetBytes(IV);
+            byte[] dData = encoding.GetBytes(decryptText);
             string decryptedtext = DecryptTextFromMemory(dData, DESalg.Key, DESalg.IV);
             encryptedTextResultTextBox.Text = decryptedtext;
 
