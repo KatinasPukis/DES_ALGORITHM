@@ -45,6 +45,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.ECBcheckBox = new System.Windows.Forms.CheckBox();
             this.CBCcheckBox = new System.Windows.Forms.CheckBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // encryptTextBox
@@ -195,10 +197,21 @@
             this.CBCcheckBox.Text = "CBC";
             this.CBCcheckBox.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DES_ALGORITHM.Properties.Resources.NvL;
+            this.pictureBox1.Location = new System.Drawing.Point(-2, -1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(392, 452);
+            this.pictureBox1.TabIndex = 24;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SpringGreen;
             this.ClientSize = new System.Drawing.Size(391, 450);
             this.Controls.Add(this.CBCcheckBox);
             this.Controls.Add(this.ECBcheckBox);
@@ -215,8 +228,10 @@
             this.Controls.Add(this.encrypButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.encryptTextBox);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,6 +256,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.CheckBox ECBcheckBox;
         private System.Windows.Forms.CheckBox CBCcheckBox;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
