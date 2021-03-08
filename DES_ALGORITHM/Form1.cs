@@ -22,26 +22,7 @@ namespace DES_ALGORITHM
             InitializeComponent();
             
         }
-        public static string BiteConverterToString(byte[] data)
-        {
-            byte[] bytes = data;
-            Console.WriteLine("The byte array: ");
-            Console.WriteLine("   {0}\n", BitConverter.ToString(bytes));
-            string s = Convert.ToBase64String(bytes);
-            Console.WriteLine("The base 64 string:\n   {0}\n", s);
-
-            return s;
-        }
-        public static byte[] StringToBite(string byteString)
-        {
-
-            // Restore the byte array.
-            byte[] newBytes = Convert.FromBase64String(byteString);
-            Console.WriteLine("The restored byte array: ");
-            Console.WriteLine("   {0}\n", BitConverter.ToString(newBytes));
-            return newBytes;
-        }
-
+       
         public void button1_Click(object sender, EventArgs e)
         {
             // ENCRYPT BUTTON
@@ -60,14 +41,11 @@ namespace DES_ALGORITHM
                     DESalg.Mode = CipherMode.CBC;
                 }
                 DESalg.Key = encoding.GetBytes(key);
-              //  DESalg.IV = DESalg.Key;
-              
-                //  byte[] keyToByte = StringToBite(key);
                 byte[] Data = EncryptTextToMemory(sData, DESalg.Key, DESalg.IV);
                 string encryptedText = encoding.GetString(Data);
-               // string encryptedText = BiteConverterToString(Data);
+               
                 string IV = encoding.GetString(DESalg.IV);
-                 //string IV = BiteConverterToString(DESalg.IV);
+                 
                 encryptedTextResultTextBox.Text = encryptedText.ToString();
                 vectorTextBox.Text = IV.ToString();
 
@@ -96,7 +74,6 @@ namespace DES_ALGORITHM
             string key = generatedKeyTextBox.Text;
             string IV = vectorTextBox.Text;
             DESalg.Key = encoding.GetBytes(key);
-        //    DESalg.IV = DESalg.Key;
             DESalg.IV = encoding.GetBytes(IV);
             byte[] dData = encoding.GetBytes(decryptText);
             string decryptedtext = DecryptTextFromMemory(dData, DESalg.Key, DESalg.IV);
@@ -108,34 +85,33 @@ namespace DES_ALGORITHM
         {
             try
             {
-                // Create a MemoryStream.
+                // sukuriamas memory stream
                 MemoryStream mStream = new MemoryStream();
 
-                // Create a new DES object.
+                // naujas des obejktas
                 DES DESalg = DES.Create();
 
-                // Create a CryptoStream using the MemoryStream
-                // and the passed key and initialization vector (IV).
+                // sukuriamas cryptostream naudojant memeorystream
+                // perduodamas raktas bei IV vektorius
                 CryptoStream cStream = new CryptoStream(mStream,
                     DESalg.CreateEncryptor(Key, IV),
                     CryptoStreamMode.Write);
 
-                // Convert the passed string to a byte array.
+                // perduota string paverciame i byte array
                 byte[] toEncrypt = new ASCIIEncoding().GetBytes(Data);
 
-                // Write the byte array to the crypto stream and flush it.
+                // byte array perasom i crypto stream
                 cStream.Write(toEncrypt, 0, toEncrypt.Length);
                 cStream.FlushFinalBlock();
 
-                // Get an array of bytes from the
-                // MemoryStream that holds the
-                // encrypted data.
+                // Gauti masyva bytu is memory stream kuris laiko uzsifruota data
+
                 byte[] ret = mStream.ToArray();
                 // Close the streams.
                 cStream.Close();
                 mStream.Close();
 
-                // Return the encrypted buffer.
+                // Return the uzsifruotas buffer
 
                 return ret;
             }
@@ -149,27 +125,14 @@ namespace DES_ALGORITHM
         {
             try
             {
-                // Create a new MemoryStream using the passed
-                // array of encrypted data.
                 MemoryStream msDecrypt = new MemoryStream(Data);
-
-                // Create a new DES object.
                 DES DESalg = DES.Create();
-
-                // Create a CryptoStream using the MemoryStream
-                // and the passed key and initialization vector (IV).
                 CryptoStream csDecrypt = new CryptoStream(msDecrypt,
                     DESalg.CreateDecryptor(Key, IV),
                     CryptoStreamMode.Read);
-
-                // Create buffer to hold the decrypted data.
                 byte[] fromEncrypt = new byte[Data.Length];
-
-                // Read the decrypted data out of the crypto stream
-                // and place it into the temporary buffer.
                 csDecrypt.Read(fromEncrypt, 0, fromEncrypt.Length);
 
-                //Convert the buffer into a string and return it.
                 return new ASCIIEncoding().GetString(fromEncrypt);
             }
             catch (CryptographicException e)
@@ -198,6 +161,14 @@ namespace DES_ALGORITHM
             FileStream fsInput = new FileStream(source, FileMode.Open, FileAccess.Read);
             FileStream fsEncrypted = new FileStream(destination, FileMode.Create, FileAccess.Write);
             DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            if (ECBcheckBox.Checked)
+            {
+                DES.Mode = CipherMode.ECB;
+            }
+            if (CBCcheckBox.Checked)
+            {
+                DES.Mode = CipherMode.CBC;
+            }
             try
             {
                 DES.Key = ASCIIEncoding.ASCII.GetBytes(key);
@@ -220,9 +191,18 @@ namespace DES_ALGORITHM
         }
         private void DecryptFile(string source, string destination, string key)
         {
+
             FileStream fsInput = new FileStream(source, FileMode.Open, FileAccess.Read);
             FileStream fsEncrypted = new FileStream(destination, FileMode.Create, FileAccess.Write);
             DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            if (ECBcheckBox.Checked)
+            {
+                DES.Mode = CipherMode.ECB;
+            }
+            if (CBCcheckBox.Checked)
+            {
+                DES.Mode = CipherMode.CBC;
+            }
             try
             {
                 DES.Key = ASCIIEncoding.ASCII.GetBytes(key);
@@ -256,7 +236,6 @@ namespace DES_ALGORITHM
                     string destination = saveFileDialog1.FileName;
                     DecryptFile(source, destination, key);
                 }
-
             }
         }
         

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.encryptTextBox = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.encrypButton = new System.Windows.Forms.Button();
             this.encryptedTextResultTextBox = new System.Windows.Forms.RichTextBox();
@@ -46,16 +45,9 @@
             this.ECBcheckBox = new System.Windows.Forms.CheckBox();
             this.CBCcheckBox = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.encryptTextBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // encryptTextBox
-            // 
-            this.encryptTextBox.Location = new System.Drawing.Point(73, 79);
-            this.encryptTextBox.Name = "encryptTextBox";
-            this.encryptTextBox.Size = new System.Drawing.Size(257, 61);
-            this.encryptTextBox.TabIndex = 0;
-            this.encryptTextBox.Text = "";
             // 
             // label1
             // 
@@ -207,12 +199,21 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // encryptTextBox
+            // 
+            this.encryptTextBox.Location = new System.Drawing.Point(73, 79);
+            this.encryptTextBox.Name = "encryptTextBox";
+            this.encryptTextBox.Size = new System.Drawing.Size(257, 61);
+            this.encryptTextBox.TabIndex = 25;
+            this.encryptTextBox.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SpringGreen;
             this.ClientSize = new System.Drawing.Size(391, 450);
+            this.Controls.Add(this.encryptTextBox);
             this.Controls.Add(this.CBCcheckBox);
             this.Controls.Add(this.ECBcheckBox);
             this.Controls.Add(this.button2);
@@ -227,7 +228,6 @@
             this.Controls.Add(this.encryptedTextResultTextBox);
             this.Controls.Add(this.encrypButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.encryptTextBox);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -238,8 +238,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox encryptTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button encrypButton;
         private System.Windows.Forms.RichTextBox encryptedTextResultTextBox;
@@ -257,6 +255,7 @@
         private System.Windows.Forms.CheckBox ECBcheckBox;
         private System.Windows.Forms.CheckBox CBCcheckBox;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.RichTextBox encryptTextBox;
     }
 }
 
