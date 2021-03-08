@@ -172,6 +172,8 @@
             // ECBcheckBox
             // 
             this.ECBcheckBox.AutoSize = true;
+            this.ECBcheckBox.Checked = true;
+            this.ECBcheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ECBcheckBox.Location = new System.Drawing.Point(154, 423);
             this.ECBcheckBox.Name = "ECBcheckBox";
             this.ECBcheckBox.Size = new System.Drawing.Size(47, 17);

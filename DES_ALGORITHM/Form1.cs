@@ -16,6 +16,7 @@ namespace DES_ALGORITHM
     {
         Encoding encoding = Encoding.GetEncoding("437");
         static string key;
+
        
         public Form1()
         {
@@ -40,6 +41,10 @@ namespace DES_ALGORITHM
                 {
                     DESalg.Mode = CipherMode.CBC;
                 }
+                if(encryptTextBox.Text!="")
+                {
+                    if(key.Length>=8 && key.Length<=8)
+                    {
                 DESalg.Key = encoding.GetBytes(key);
                 byte[] Data = EncryptTextToMemory(sData, DESalg.Key, DESalg.IV);
                 string encryptedText = encoding.GetString(Data);
@@ -48,6 +53,17 @@ namespace DES_ALGORITHM
                  
                 encryptedTextResultTextBox.Text = encryptedText.ToString();
                 vectorTextBox.Text = IV.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error key lenght is :" + key.Length +'\n'+ "Key has to be 8 characters long!");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Error text is empty!");
+                }
 
             }
             catch (Exception es)
