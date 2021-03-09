@@ -16,6 +16,7 @@ namespace DES_ALGORITHM
     {
         Encoding encoding = Encoding.GetEncoding("437");
         static string key;
+        static string IV;
 
        
         public Form1()
@@ -177,6 +178,7 @@ namespace DES_ALGORITHM
             FileStream fsInput = new FileStream(source, FileMode.Open, FileAccess.Read);
             FileStream fsEncrypted = new FileStream(destination, FileMode.Create, FileAccess.Write);
             DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            IV = vectorTextBox.Text;
             if (ECBcheckBox.Checked)
             {
                 DES.Mode = CipherMode.ECB;
@@ -188,7 +190,7 @@ namespace DES_ALGORITHM
             try
             {
                 DES.Key = ASCIIEncoding.ASCII.GetBytes(key);
-                DES.IV = ASCIIEncoding.ASCII.GetBytes(key);
+                DES.IV = ASCIIEncoding.ASCII.GetBytes(IV);
                 ICryptoTransform desencrypt = DES.CreateEncryptor();
                 CryptoStream cryptoStream = new CryptoStream(fsEncrypted, desencrypt, CryptoStreamMode.Write);
                 byte[] byteInput = new byte[fsInput.Length - 0];
@@ -211,6 +213,7 @@ namespace DES_ALGORITHM
             FileStream fsInput = new FileStream(source, FileMode.Open, FileAccess.Read);
             FileStream fsEncrypted = new FileStream(destination, FileMode.Create, FileAccess.Write);
             DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            IV = vectorTextBox.Text;
             if (ECBcheckBox.Checked)
             {
                 DES.Mode = CipherMode.ECB;
@@ -222,7 +225,7 @@ namespace DES_ALGORITHM
             try
             {
                 DES.Key = ASCIIEncoding.ASCII.GetBytes(key);
-                DES.IV = ASCIIEncoding.ASCII.GetBytes(key);
+                DES.IV = ASCIIEncoding.ASCII.GetBytes(IV);
                 ICryptoTransform desencrypt = DES.CreateDecryptor();
                 CryptoStream cryptoStream = new CryptoStream(fsEncrypted, desencrypt, CryptoStreamMode.Write);
                 byte[] byteInput = new byte[fsInput.Length - 0];
